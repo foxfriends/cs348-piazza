@@ -1,6 +1,6 @@
 <Header title="CS348 Piazza" />
 <div class="content">
-  <Sidebar posts={titles} selected={selected} on:select="set({ selected: event.nr })"/>
+  <Sidebar posts={titles} selected={selected} on:select="changeQuestion(event.nr)"/>
   <Content post={posts.find(({ nr }) => nr === selected)} {students} />
 </div>
 
@@ -32,6 +32,13 @@ export default {
     Header: './Header',
     Sidebar: './Sidebar',
     Content: './Content',
+  },
+
+  methods: {
+    changeQuestion(nr) {
+      this.set({ selected: nr });
+      window.location.hash = nr;
+    }
   },
 
   computed: {
