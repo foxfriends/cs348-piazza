@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mathjax": "^2.7.5"
+    "he": "^1.2.0",
+    "katex": "^0.10.0"
   },
   "devDependencies": {
     "parcel-bundler": "^1.11.0",

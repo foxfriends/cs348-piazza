@@ -1,18 +1,33 @@
 <div class="comment">
-  <span class="author">
-    {comment.anon !== 'no' ? 'Anonymous:' : 'Someone:'}
-  </span>
-  {@html comment.subject}
+  <div class="author">
+    {studentName(comment)}
+  </div>
+  <Text html={comment.subject} />
 
   {#each comment.children as response}
   <div class="response">
-    <span class="author">
-      {response.anon !== 'no' ? 'Anonymous:' : 'Someone:'}
-    </span>
-    {@html response.subject}
+    <div class="author">
+      {studentName(response)}
+    </div>
+    <Text html={response.subject} />
   </div>
   {/each}
 </div>
+
+<script>
+export default {
+  components: {
+    Text: './Text.svelte',
+  },
+
+  computed: {
+    studentName: ({ students }) => post =>
+      post.anon !== 'no'
+        ? 'Anonymous'
+        : (students[post.uid] || { name: 'Anonymous' }).name,
+  },
+}
+</script>
 
 <style>
 .author {
