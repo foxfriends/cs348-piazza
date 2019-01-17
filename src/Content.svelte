@@ -1,7 +1,7 @@
 <div class="content">
 {#if post}
   <div class="question">
-    <h1>{@html question.title}</h1>
+    <h1>{@html question.subject}</h1>
     <main>
       <Text html={question.content} />
     </main>
@@ -26,7 +26,7 @@
       Thanks! ({(studentAnswer.tag_endorse || []).length})
     </span>
     <span>
-      {studentName(studentAnswer)}
+      {studentName(studentAnswer.history[0])}
     </span>
     </div>
   </div>
@@ -62,10 +62,7 @@ export default {
   },
 
   computed: {
-    question: ({ post }) => ({
-      title: post.history[0].subject,
-      content: post.history[0].content,
-    }),
+    question: ({ post }) => post.history[0],
     studentAnswer: ({ post }) => post.children.find(child => child.type === 's_answer'),
     instructorAnswer: ({ post }) => post.children.find(child => child.type === 'i_answer'),
     comments: ({ post }) => post.children.filter(child => child.type === 'followup'),
